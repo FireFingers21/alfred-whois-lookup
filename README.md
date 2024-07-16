@@ -18,3 +18,5 @@ The [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/) w
 ![Querying alfredapp.com without summary](Workflow/images/about/rawData.png)
 
 Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/) or selected text.
+
+![Using the Universal Action](Workflow/images/about/universalAction.png)
