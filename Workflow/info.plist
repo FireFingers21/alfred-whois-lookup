@@ -180,7 +180,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># Loading subtitle
+				<string># Set Loading subtitle
 [[ "${arg}" != "${1}" ]] &amp;&amp; unset textView
 arg="${1}"
 
@@ -215,6 +215,8 @@ EOB</string>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
 				<string>{const:alfred_workflow_description}</string>
 				<key>title</key>
@@ -253,8 +255,6 @@ EOB</string>
 				<integer>0</integer>
 				<key>hotmod</key>
 				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -275,7 +275,7 @@ EOB</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -411,7 +411,9 @@ The [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/) w
 
 ![Querying alfredapp.com without summary](images/about/rawData.png)
 
-Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/) or selected text.</string>
+Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/) or selected text.
+
+![Using the Universal Action](images/about/universalAction.png)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0D60511B-7597-436E-BE4A-C17C68128E67</key>
@@ -622,8 +624,8 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2024.6</string>
+	<string>2024.7</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/FireFingers21/alfred-whois-lookup</string>
 </dict>
 </plist>
