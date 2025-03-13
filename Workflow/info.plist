@@ -166,7 +166,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>{var:whois_keyword}</string>
 				<key>queuedelaycustom</key>
@@ -180,41 +180,11 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># Set Loading subtitle
-[[ "${arg}" != "${1}" ]] &amp;&amp; unset textView
-arg="${1}"
-
-if [[ -z "${textView}" ]]; then
-	sub="Search WHOIS for '${1}'"
-else
-	sub="Loading..."
-fi
-
-# JSON Output
-cat &lt;&lt; EOB
-{
-"variables": {
-	"arg": "$arg"
-},
-"items": [
-	{
-		"title": "${alfred_workflow_name}",
-		"subtitle": "${sub}",
-		"arg": "${1}",
-		"variables": {"textView": "1"},
-		"mods": {
-			"cmd": {
-				"subtitle": "View WHOIS for '${1}' as text file",
-				"variables": {"textView": "0"}
-			}
-		}
-	}
-]}
-EOB</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>search.sh</string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
@@ -222,7 +192,7 @@ EOB</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
-				<integer>11</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
