@@ -2,6 +2,8 @@
 
 Perform a WHOIS lookup in Alfred
 
+[⤓ Install from the Alfred Gallery](https://alfred.app/workflows/firefingers21/whois-lookup/)
+
 ## Usage
 
 Perform a [WHOIS](https://en.wikipedia.org/wiki/WHOIS) lookup using the `whois` keyword. Type the domain or IP address you would like to query.
