@@ -1,7 +1,21 @@
 #!/bin/zsh --no-rcs
 
-readonly whois=$(whois "${1}" | tr -d '\r')
-output="# WHOIS ${1}"
+if [[ "${forceReload}" -ne 1 ]] && [[ -f "${whois_file}" ]] && [[ "$(date -r "${whois_file}" +%s)" -gt "$(date -v -"59"M +%s)" ]]; then
+    # Lookup WHOIS cache file
+    readonly whois=$(cat "${whois_file}")
+else
+    # Lookup WHOIS server
+    readonly whois=$(whois "${arg}" | tr -d '\r')
+    mkdir -p "${alfred_workflow_cache}"
+    # Only write to cache if valid entry
+    if [[ -z "$(awk '/(^\% This query returned 0 objects\.|^\% Error: Invalid query)/' <<< "${whois}")" ]]; then
+        echo "${whois}" > "${whois_file}"
+    fi
+fi
+# Skip formatting if viewing as text file
+[[ "${textView}" -eq 0 ]] && open "${whois_file}" && exit
+
+output="# WHOIS ${arg}"
 
 # Domain Information
 if [[ $domainInfo -eq 1 ]]; then
@@ -48,10 +62,5 @@ output+=$(echo "\n\n## Raw WHOIS Data\n
 ${whois}
 \`\`\`")
 
-# Export to File or Text View
-if [[ "${textView}" -eq 1 ]]; then
-    echo "${output}"
-else
-    mkdir -p ${alfred_workflow_cache}
-    echo "${whois}" > ${alfred_workflow_cache}/whois.txt
-fi
+# Output Formatted WHOIS Data to Text View
+echo "${output}"
