@@ -11,7 +11,7 @@ fi
 arg="${1}"
 
 # Set Last Updated Time
-readonly whois_file="${alfred_workflow_cache}/${arg//\//%2F}.txt"
+whois_file="${alfred_workflow_cache}/${arg//\//%2F}.txt"
 [[ -f "${whois_file}" ]] && lastUpdatedMinutes=$((($(date +%s)-$(date -r "${whois_file}" +%s))/60))
 
 if [[ ${lastUpdatedMinutes} -eq 0 || ${lastUpdatedMinutes} -gt 59 ]]; then
@@ -26,13 +26,28 @@ fi
 function autocomplete {
     while IFS= read -r file; do
     fileName=$(basename -s ".txt" "${file}")
+    whois_file="${file}"
+    [[ -f "${whois_file}" ]] && lastUpdatedMinutes=$((($(date +%s)-$(date -r "${whois_file}" +%s))/60))
+
+    if [[ ${lastUpdatedMinutes} -eq 0 || ${lastUpdatedMinutes} -gt 59 ]]; then
+        lastUpdated="Just now"
+    elif [[ ${lastUpdatedMinutes} -eq 1 ]]; then
+        lastUpdated="${lastUpdatedMinutes} minute ago"
+    else
+        lastUpdated="${lastUpdatedMinutes} minutes ago"
+    fi
 
     [[ ${fileName//\%2F/\/} != ${arg} ]] && echo '{
         "title": "'"${fileName//\%2F/\/}"'",
         "arg": "'"${fileName//\%2F/\/}"'",
         "autocomplete": "'"${fileName//\%2F/\/}"'",
-        "variables": { "autocomplete": "1" },
-        "icon": { "path": "suggestion.png" }
+        "icon": { "path": "suggestion.png" },
+        "variables": {
+            "arg": "'"${fileName//\%2F/\/}"'",
+            "lastUpdated": "'"${lastUpdated}"'",
+            "whois_file": "'"${whois_file}"'",
+            '"$([[ ${quickAutocomplete} -eq 1 ]] && echo '"textView": "1"' || echo '"autocomplete": "1"')"'
+        }
     },'
     done <<< "${domainList}"
 }

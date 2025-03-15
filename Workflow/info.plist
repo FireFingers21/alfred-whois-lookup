@@ -796,13 +796,32 @@ Autocomplete</string>
 				<string>Search Suggestions</string>
 			</dict>
 			<key>description</key>
-			<string>Enable suggestions &amp; tab-completion of WHOIS history</string>
+			<string></string>
 			<key>label</key>
 			<string>Autocomplete</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>useAutocomplete</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Instant Lookup</string>
+			</dict>
+			<key>description</key>
+			<string>Enable suggestions &amp; tab-completion of WHOIS history</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>quickAutocomplete</string>
 		</dict>
 	</array>
 	<key>version</key>
