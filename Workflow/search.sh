@@ -35,6 +35,7 @@ function autocomplete {
             "arg": "'"${fileName}"'",
             "autocomplete": "'"${fileName}"'",
             "icon": { "path": "suggestion.png" },
+            "mods": { "cmd": { "variables": { "autocomplete": "1" } } },
             "variables": {
                 "loading": "1",
                 "lastUpdated": "'"${lastUpdated}"'",
