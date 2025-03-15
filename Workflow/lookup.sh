@@ -5,7 +5,7 @@ if [[ "${forceReload}" -ne 1 ]] && [[ -f "${whois_file}" ]] && [[ "$(date -r "${
     readonly whois=$(cat "${whois_file}")
 else
     # Lookup WHOIS server
-    readonly whois=$(whois "${arg}" | tr -d '\r')
+    readonly whois=$(whois "${1}" | tr -d '\r')
     mkdir -p "${alfred_workflow_cache}"
     # Only write to cache if valid entry
     if [[ -z "$(awk '/(^\% This query returned 0 objects\.|^\% Error: Invalid query)/' <<< "${whois}")" ]]; then
@@ -13,9 +13,9 @@ else
     fi
 fi
 # Skip formatting if viewing as text file
-[[ "${textView}" -eq 0 ]] && open "${whois_file}" && exit
+[[ "${fileView}" -eq 1 ]] && open "${whois_file}" && exit
 
-output="# WHOIS ${arg}"
+output="# WHOIS ${1}"
 
 # Domain Information
 if [[ $domainInfo -eq 1 ]]; then
@@ -39,20 +39,23 @@ if [[ $domainInfo -eq 1 ]]; then
 fi
 
 # Contact Information
+function contactSummary {
+    awk -v pattern="${1}" '$0 ~ pattern && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}"
+}
 if [[ $registrantContact -eq 1 ]]; then
-	emptyCheck=$(awk '/^Registrant/ && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}")
+	emptyCheck=$(contactSummary "^Registrant")
 	[[ -n "${emptyCheck}" ]] && output+="\n\n### Registrant Contact\n${emptyCheck}"
 fi
 if [[ $adminContact -eq 1 ]]; then
-	emptyCheck=$(awk '/^Admin/ && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}")
+	emptyCheck=$(contactSummary "^Admin")
 	[[ -n "${emptyCheck}" ]] && output+="\n\n### Administrative Contact\n${emptyCheck}"
 fi
 if [[ $techContact -eq 1 ]]; then
-	emptyCheck=$(awk '/^Tech/ && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}")
+	emptyCheck=$(contactSummary "^Tech")
 	[[ -n "${emptyCheck}" ]] && output+="\n\n### Technical Contact\n${emptyCheck}"
 fi
 if [[ $billingContact -eq 1 ]]; then
-	emptyCheck=$(awk '/^Billing/ && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}")
+	emptyCheck=$(contactSummary "^Billing")
 	[[ -n "${emptyCheck}" ]] && output+="\n\n### Billing Contact\n${emptyCheck}"
 fi
 

@@ -379,13 +379,13 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:textView}</string>
+						<string>{var:fileView}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>6</integer>
 						<key>matchstring</key>
-						<string>1</string>
+						<string></string>
 						<key>outputlabel</key>
 						<string>Inline</string>
 						<key>uid</key>
