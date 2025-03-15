@@ -1,12 +1,12 @@
 #!/bin/zsh --no-rcs
 
 # Set Loading subtitle
-if [[ "${arg}" != "${1}" ]]; then
-	sub="Search WHOIS for '${1}'"
-	subCMD="${sub} in text file"
-else
+if [[ "${loading}" -eq 1 && "${autocomplete}" -ne 1 ]]; then
 	sub="Loading..."
 	subCMD="${sub}"
+else
+	sub="Search WHOIS for '${1}'"
+	subCMD="${sub} in text file"
 fi
 arg="${1}"
 
@@ -44,6 +44,7 @@ function autocomplete {
         "icon": { "path": "suggestion.png" },
         "variables": {
             "arg": "'"${fileName//\%2F/\/}"'",
+            "loading": "1",
             "lastUpdated": "'"${lastUpdated}"'",
             "whois_file": "'"${whois_file}"'",
             '"$([[ ${quickAutocomplete} -eq 1 ]] && echo '"textView": "1"' || echo '"autocomplete": "1"')"'
@@ -74,6 +75,7 @@ cat << EOB
 		"arg": "${arg}",
 		"autocomplete": "${autocompleteJSON}",
 		"variables": {
+		    "loading": "1",
 		    "textView": "1",
 			"autocomplete": "0"
 		},
@@ -81,12 +83,13 @@ cat << EOB
 			"cmd": {
 				"subtitle": "${subCMD}",
 				"variables": {
+				    "loading": "1",
 				    "textView": "0",
 					"autocomplete": "0"
 				}
 			}
 		}
 	},
-	$([[ ${useAutocomplete} -eq 1 ]] && autocomplete)
+	$([[ ${useAutocomplete} -eq 1 && ${loading} -ne 1 ]] && autocomplete)
 ]}
 EOB
