@@ -20,7 +20,7 @@ function getLastUpdated {
     fi
 }
 whois_file="${alfred_workflow_cache}/${1//\//%2F}.txt"
-[[ -f "${whois_file}" ]] && getLastUpdated "$((($(date +%s)-$(date -r "${whois_file}" +%s))/60))"
+[[ -f "${whois_file}" ]] && getLastUpdated "$((($(date +%s)-$(date -r "${whois_file}" +%s))/60))" || lastUpdated="Just now"
 
 # Autocomplete
 arg="${1}"
