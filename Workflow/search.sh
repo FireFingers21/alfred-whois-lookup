@@ -48,7 +48,7 @@ function autocomplete {
 if [[ ${useAutocomplete} -eq 1 ]]; then
     domainList=$(find ${alfred_workflow_cache} -maxdepth 1 -iname "${1}*.txt" | head -n 8)
     topDomain=$(basename -s ".txt" "$(echo ${domainList} | head -n 1)")
-    autocompleteJSON="${topDomain//\%2F/\/}"
+    [[ -n ${topDomain} ]] && autocompleteJSON="${topDomain//\%2F/\/}" || autocompleteJSON="${1}"
 else
     autocompleteJSON="${1}"
 fi
