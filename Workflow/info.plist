@@ -299,7 +299,7 @@
 				<key>externaltriggerid</key>
 				<string>whoisReload</string>
 				<key>passinputasargument</key>
-				<false/>
+				<true/>
 				<key>passvariables</key>
 				<true/>
 				<key>workflowbundleid</key>
@@ -423,7 +423,7 @@
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
-				<false/>
+				<true/>
 				<key>variables</key>
 				<dict>
 					<key>forceReload</key>

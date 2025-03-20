@@ -5,6 +5,7 @@ if [[ "${forceReload}" -ne 1 ]] && [[ -f "${whois_file}" ]] && [[ "$(date -r "${
     readonly whois=$(cat "${whois_file}")
 else
     # Lookup WHOIS server
+    [[ "${forceReload}" -eq 1 ]] && 1=$(echo "${1:6}" | head -n 1)
     readonly whois=$(whois "${1}" | tr -d '\r')
     mkdir -p "${alfred_workflow_cache}"
     # Only write to cache if valid entry
