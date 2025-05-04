@@ -1,6 +1,6 @@
 #!/bin/zsh --no-rcs
 
-if [[ "${forceReload}" -ne 1 ]] && [[ -f "${whois_file}" ]] && [[ "$(date -r "${whois_file}" +%s)" -gt "$(date -v -"59"M +%s)" ]]; then
+if [[ "${forceReload}" -ne 1 ]] && [[ -f "${whois_file}" ]] && [[ "$(date -r "${whois_file}" +%s)" -gt "$(date -v -"359"M +%s)" ]]; then
     # Lookup WHOIS cache file
     readonly whois=$(cat "${whois_file}")
 else
