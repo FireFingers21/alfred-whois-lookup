@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>com.firefingers21.whoislookup</string>
 	<key>category</key>
-	<string>Internet</string>
+	<string>Shared</string>
 	<key>connections</key>
 	<dict>
 		<key>0D60511B-7597-436E-BE4A-C17C68128E67</key>
@@ -123,7 +123,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -133,7 +133,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>C31D15AD-8829-40BF-961F-AF7B601E2F0D</key>
@@ -284,7 +284,7 @@
 				<key>spellchecking</key>
 				<integer>0</integer>
 				<key>stackview</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.userinterface.text</string>

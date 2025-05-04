@@ -9,7 +9,7 @@ else
     readonly whois=$(whois "${1}" | tr -d '\r')
     mkdir -p "${alfred_workflow_cache}"
     # Only write to cache if valid entry
-    if [[ -z "$(awk '/(^\% This query returned 0 objects\.|^\% Error: Invalid query)/' <<< "${whois}")" ]]; then
+    if [[ -z "$(awk '/(^\% This query returned 0 objects\.|^\% Error: Invalid query|^Domain not found|^No match for domain)/' <<< "${whois}")" ]]; then
         echo "${whois}" > "${whois_file}"
     fi
 fi
@@ -20,23 +20,23 @@ output="# WHOIS ${1}"
 
 # Domain Information
 if [[ $domainInfo -eq 1 ]]; then
-	emptyCheck=$(awk 'BEGIN { dateRegex = "[0-9]{4}-[0-9]{2}-[0-9]{2}" }
-	/(^[[:blank:]]*Domain Name|^domain)/ && !seen[$0]++ { if ($0 ~ /\./) arr[0] = "* **Domain Name**: " tolower($NF) }
+	emptyCheck=$(awk 'BEGIN { dateRegex = "[0-9]{4}-[0-9]{2}-[0-9]{2}"; nsArr = 0; abuseArr = 0 }
+	/(^[[:blank:]]*Domain [Nn]ame|^domain)/ && !seen[$0]++ { if ($0 ~ /\./) arr[0] = "* **Domain Name**: " tolower($NF) }
 	/^[[:blank:]]*[Rr]egistrar:[^$]/ && !seen[$0]++ { $1=""; arr[1] = "* **Registrar**:" $0 }
 	/^[[:blank:]]*Creation Date/ && !seen[$0]++ { start = match($0,dateRegex); arr[2] = "* **Creation Date**: " substr($0,start,10) }
 	/Expir.*Date:/ && !seen[$0]++ { start = match($0,dateRegex); arr[3] = "* **Expiry Date**: " substr($0,start,10) }
-	/(^[[:blank:]]*Updated Date|^[Ll]ast.?[Uu]pdate)/ && !seen[$0]++ { start = match($0,dateRegex); arr[4] = "* **Renewed Date**: " substr($0,start,10) }
+	/(^[[:blank:]]*Updated Date|^[Ll]ast.?([Uu]pdate|Modified))/ && !seen[$0]++ { start = match($0,dateRegex); arr[4] = "* **Renewed Date**: " substr($0,start,10) }
+	/^[[:blank:]]*Name Server/ && $0 !~ /(:$|: $)/ && !seen[tolower($NF)]++ { ns[nsArr++] = "* **Name Server**: " tolower($NF) }
+	/^[[:blank:]]*Registrar Abuse Contact Email:[^$]/ && !seen[$5]++ { abuse[abuseArr++] = "* **Registrar Abuse Contact Email**: " tolower($5) }
 	END {
 		for (i = 0; i < length(arr); i++)
 			print arr[i]
+		for (i = 0; i < length(ns); i++)
+			print ns[i]
+		for (i = 0; i < length(abuseArr); i++)
+			print abuse[i]
 	}' <<< "${whois}")
 	[[ -n "${emptyCheck}" ]] && output+="\n\n### Domain Information\n${emptyCheck}"
-
-	emptyCheck=$(awk '/^[[:blank:]]*Name Server/ && !seen[tolower($NF)]++ { print "* **Name Server**:", tolower($NF) }' <<< "${whois}")
-	[[ "${emptyCheck}" != "* **Name Server**: " ]] && output+="\n${emptyCheck}"
-
-	emptyCheck=$(awk '/^[[:blank:]]*Registrar Abuse Contact Email:[^$]/ && !seen[$5]++ { print "* **Registrar Abuse Contact Email**:", tolower($5) }' <<< "${whois}")
-	[[ "${emptyCheck}" != "* **Registrar Abuse Contact Email**: "  ]] && output+="\n${emptyCheck}"
 fi
 
 # Contact Information
