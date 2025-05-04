@@ -844,7 +844,7 @@ Autocomplete</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2025.3.2</string>
+	<string>2025.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/FireFingers21/alfred-whois-lookup</string>
 </dict>
