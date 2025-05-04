@@ -29,6 +29,7 @@ function autocomplete {
         fileName=$(basename -s ".txt" "${file}")
         fileName="${fileName//\%2F/\/}"
         getLastUpdated "$((($(date +%s)-$(date -r "${file}" +%s))/60))"
+        # hex code: #4CA9F6
 
         [[ "${fileName}" != "${arg}" ]] && echo '{
             "title": "'"${fileName}"'",
