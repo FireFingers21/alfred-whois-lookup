@@ -513,29 +513,27 @@
 	<key>readme</key>
 	<string>## Usage
 
-Perform a [WHOIS](https://en.wikipedia.org/wiki/WHOIS) lookup using the `whois` keyword. Type the domain, IP address, or IP range you would like to query.
+Perform a [WHOIS](https://en.wikipedia.org/wiki/WHOIS) lookup via the `whois` keyword. Type the domain, IP address, or IP range you would like to query.
 
 ![Using the whois keyword](images/about/keyword.png)
 
 * &lt;kbd&gt;↩&lt;/kbd&gt; View WHOIS data in Alfred's [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/)
 * &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; View raw WHOIS data in a text file
 
-Autocomplete previous lookups by pressing tab or selecting from the search suggestions. This can be toggled in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/). By default, the first suggestion will be tab-completed.
+Autocomplete previous lookups by pressing tab or selecting from the search suggestions. By default, the first suggestion will be tab-completed.
 
 ![Using autocomplete](images/about/autocomplete.png)
 
-The [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/) can summarize important information above the raw WHOIS data and is [customizable](https://www.alfredapp.com/help/workflows/user-configuration/).
+When viewing a WHOIS response, the [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/) can selectively summarize key information before showing the raw data, configurable from the [Workflow's Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
 
-![Querying alfredapp.com with summary](images/about/summaryData.png)
+![Viewing WHOIS data for alfredapp.com](images/about/textView.png)
 
-![Querying alfredapp.com without summary](images/about/rawData.png)
-
-* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Refresh WHOIS data (Lookups are cached for an hour)
+* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Refresh WHOIS data (Lookups are cached for 6 hours)
 * &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Open raw WHOIS data in a text file
 
 Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from selected text or Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/).
 
-![Using the Universal Action](images/about/universalAction.png)</string>
+![Using the Universal Action](images/about/ua.png)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0D60511B-7597-436E-BE4A-C17C68128E67</key>
