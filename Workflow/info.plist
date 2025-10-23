@@ -497,17 +497,37 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/url-processing/url.hostname</string>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Extract domain from query and TLDs from PSL
+domain="${${1#*://}%%/*}"
+tlds=($(grep -v -E "^(//|$)" "public_suffix_list.dat"))
+
+# Search for longest matching TLD
+for tld in "${tlds[@]}"; do
+    if [[ "${domain}" == *"${tld}" ]]; then
+        (( ${#tld} &gt; ${#longest_tld} )) &amp;&amp; longest_tld="$tld"
+    fi
+done
+
+# Extract root domain only if TLD exists in PSL
+[[ -n ${longest_tld} ]] &amp;&amp; echo -n "${${domain%.${longest_tld}}##*.}.${longest_tld}" || echo -n "${domain}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C31D15AD-8829-40BF-961F-AF7B601E2F0D</string>
+			<string>3F00C751-E569-4357-B837-CF816A8F8D50</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
