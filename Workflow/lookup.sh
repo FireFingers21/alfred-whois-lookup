@@ -41,16 +41,20 @@ fi
 
 # Contact Information
 blacklist=("Domains By Proxy, LLC" \
-"Privacy service provided by Withheld for Privacy ehf" \
-"Private by Design, LLC" \
-"Digital Privacy Corporation" \
-"Super Privacy Service LTD c/o Dynadot" \
-"Identity Protection Service")
+    "Privacy service provided by Withheld for Privacy ehf" \
+    "Private by Design, LLC" \
+    "Digital Privacy Corporation" \
+    "Super Privacy Service LTD c/o Dynadot" \
+    "Identity Protection Service" \
+    "Proxy Protection LLC" \
+    "Privacy Protect, LLC (PrivacyProtect.org)" \
+    "Privacy Hero Inc." \
+    "Anonymize LLC")
 function contactSummary {
     # Check against privacy services blacklist
     if [[ "${hideBlacklist}" -eq 1 ]]; then
-        contactOrg=$(awk -v pattern="${1} Organization" '$0 ~ pattern && $0 !~ /(:$|: $|REDACTED)/ && !seen[$0]++ { $1=""; $2=""; print substr($0,3) }' <<< "${whois}")
-        [[ -n "${contactOrg}" && ("${blacklist[@]}" == *"${contactOrg}"* || "${contactOrg}" == "Contact Privacy Inc. Customer"*) ]] && exit
+        contactOrg=$(awk -v pattern="${1} Organization" '$0 ~ pattern && !seen[$0]++ { $1=""; $2=""; print substr($0,3) }' <<< "${whois}")
+        [[ "${blacklist[@]}" == *"${contactOrg}"* ]] && return
     fi
     # Fetch contact information
     awk -v pattern="${1}" '$0 ~ pattern && !seen[$0]++ { if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /(:$|: $)/ && $0 !~ /Email[^@]*$/) print "*", $0 }' <<< "${whois}"
