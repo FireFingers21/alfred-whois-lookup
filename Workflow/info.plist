@@ -18,7 +18,7 @@
 				<key>modifiersubtext</key>
 				<string>⌥↩ Update Now</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -35,16 +35,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C31D15AD-8829-40BF-961F-AF7B601E2F0D</string>
+				<string>3F00C751-E569-4357-B837-CF816A8F8D50</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
-		<key>68086CAB-E7AF-481F-87FF-86945C52E2C6</key>
+		<key>3360F622-37AC-4010-9972-6FA451A7FF71</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -53,8 +53,19 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>8406A42D-C07D-4334-A795-0D7DEFDC941A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3F00C751-E569-4357-B837-CF816A8F8D50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4A84DC9C-291A-401E-9763-848D9579B2BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -117,36 +128,23 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>68086CAB-E7AF-481F-87FF-86945C52E2C6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>4A84DC9C-291A-401E-9763-848D9579B2BD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-		</array>
-		<key>C31D15AD-8829-40BF-961F-AF7B601E2F0D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4A84DC9C-291A-401E-9763-848D9579B2BD</string>
+				<string>3360F622-37AC-4010-9972-6FA451A7FF71</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4A84DC9C-291A-401E-9763-848D9579B2BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 		</array>
 		<key>C616DC19-4F2C-4BB0-A121-3C2C7CFA9C96</key>
@@ -161,12 +159,22 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8C1C8092-F9BD-4D25-8E5B-C1DB01A1AB47</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
 	<string>FireFingers21</string>
 	<key>description</key>
-	<string>Perform a WHOIS lookup in Alfred</string>
+	<string>Perform a WHOIS lookup</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -572,16 +580,16 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 			<key>xpos</key>
 			<real>620</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>80</real>
 		</dict>
 		<key>10618D96-0920-40DD-B93D-B15ABCA537E6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>280</real>
 		</dict>
 		<key>1998BF4D-3A1C-491D-BFA4-58AF36971519</key>
 		<dict>
@@ -590,28 +598,38 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>280</real>
 		</dict>
-		<key>4A84DC9C-291A-401E-9763-848D9579B2BD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Loading Screen/
-Autocomplete</string>
-			<key>xpos</key>
-			<real>390</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
-		<key>68086CAB-E7AF-481F-87FF-86945C52E2C6</key>
+		<key>3360F622-37AC-4010-9972-6FA451A7FF71</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>110</real>
+		</dict>
+		<key>3F00C751-E569-4357-B837-CF816A8F8D50</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>Extract Root Domain</string>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>280</real>
+		</dict>
+		<key>4A84DC9C-291A-401E-9763-848D9579B2BD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Loading Screen</string>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>215</real>
 		</dict>
 		<key>6EA42254-DA33-4F68-BF20-49C93B752987</key>
 		<dict>
@@ -622,7 +640,7 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>80</real>
 		</dict>
 		<key>76AE0097-92A6-4AD5-B264-E3F3F1B6172D</key>
 		<dict>
@@ -631,7 +649,7 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>570</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>110</real>
 		</dict>
 		<key>806A240B-3C2F-4F81-B7E1-05EFD14DA73F</key>
 		<dict>
@@ -640,7 +658,7 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>80</real>
 		</dict>
 		<key>8BAC262F-5C23-460C-B30D-FF98ABA74233</key>
 		<dict>
@@ -649,7 +667,18 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>110</real>
+		</dict>
+		<key>8C1C8092-F9BD-4D25-8E5B-C1DB01A1AB47</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Loading Screen</string>
+			<key>xpos</key>
+			<real>840</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>BF10AC66-4906-40D4-A59E-60EE1B3C1F22</key>
 		<dict>
@@ -660,16 +689,7 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>45</real>
-		</dict>
-		<key>C31D15AD-8829-40BF-961F-AF7B601E2F0D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>310</real>
+			<real>80</real>
 		</dict>
 		<key>C616DC19-4F2C-4BB0-A121-3C2C7CFA9C96</key>
 		<dict>
@@ -678,7 +698,7 @@ Autocomplete</string>
 			<key>xpos</key>
 			<real>775</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>110</real>
 		</dict>
 		<key>EC103D59-8D47-4A74-A4FE-870902394150</key>
 		<dict>
@@ -687,9 +707,9 @@ Autocomplete</string>
 			<key>note</key>
 			<string>Update Cache</string>
 			<key>xpos</key>
-			<real>825</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -821,7 +841,7 @@ Autocomplete</string>
 				<string>Hide Privacy Services</string>
 			</dict>
 			<key>description</key>
-			<string>Omit summarized contact data for domains using known WHOIS Privacy Services</string>
+			<string>Omit summarized contact data matching known WHOIS Privacy Services</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
