@@ -347,38 +347,6 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:autocomplete}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>6</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string></string>
-						<key>uid</key>
-						<string>8406A42D-C07D-4334-A795-0D7DEFDC941A</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string></string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>68086CAB-E7AF-481F-87FF-86945C52E2C6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
 						<string>{var:fileView}</string>
 						<key>matchcasesensitive</key>
 						<false/>
@@ -421,9 +389,9 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>{var:domain}</string>
 				<key>passthroughargument</key>
-				<true/>
+				<false/>
 				<key>variables</key>
 				<dict>
 					<key>forceReload</key>
@@ -852,7 +820,7 @@ Autocomplete</string>
 				<string>Instant Lookup</string>
 			</dict>
 			<key>description</key>
-			<string>Enable suggestions &amp; tab-completion of WHOIS history</string>
+			<string>Configure autocomplete behaviour of lookup history</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
