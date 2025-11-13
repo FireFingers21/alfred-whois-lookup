@@ -37,7 +37,7 @@ if [[ ${useAutocomplete} -eq 1 ]]; then
             "arg": "${fileName}",
             "autocomplete": "${fileName}",
             "valid": "${quickAutocomplete}",
-            "icon": { "path": "suggestion.png" },
+            "icon": { "path": "images/suggestion.png" },
             "mods": { "cmd": { "valid": false } },
             "variables": { "loading":"1", "lastUpdated":"${lastUpdated}", "whois_file":"${file}" }
         },
@@ -55,13 +55,13 @@ cat << EOB
 "items": [
 	{
 		"title": "${alfred_workflow_name}",
-		"subtitle": "Search WHOIS for ${1}",
+		"subtitle": "Search WHOIS for '${1}'",
 		"arg": "${1}",
 		"autocomplete": "${${topAutocomplete:+${topAutocomplete//\%2F/\/}}:-${1}}",
 		"variables": { "loading": "1" },
 		"mods": {
 			"cmd": {
-				"subtitle": "Search WHOIS for ${1} in text file",
+				"subtitle": "Search WHOIS for '${1}' in text file",
 				"variables": { "loading": "1", "fileView": "1" }
 			}
 		}

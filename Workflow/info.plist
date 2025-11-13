@@ -552,8 +552,8 @@ Perform a [WHOIS](https://en.wikipedia.org/wiki/WHOIS) lookup via the `whois` ke
 
 ![Using the whois keyword](images/about/keyword.png)
 
-* &lt;kbd&gt;↩&lt;/kbd&gt; View WHOIS data in Alfred's [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/)
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; View raw WHOIS data in a text file
+* &lt;kbd&gt;↩&lt;/kbd&gt; View WHOIS data in Alfred's [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/).
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; View raw WHOIS data in a text file.
 
 Autocomplete previous lookups by pressing tab or selecting from the search suggestions. By default, the first suggestion will be tab-completed.
 
@@ -563,10 +563,10 @@ When viewing a WHOIS response, the [Text View](https://www.alfredapp.com/help/wo
 
 ![Viewing WHOIS data for alfredapp.com](images/about/textView.png)
 
-* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Refresh WHOIS data (Lookups are cached for 6 hours)
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Open raw WHOIS data in a text file
+* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Refresh WHOIS data (Lookups are cached for 6 hours).
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Open raw WHOIS data in a text file.
 
-Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from selected text or Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/).
+Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/) or selected text.
 
 ![Using the Universal Action](images/about/ua.png)</string>
 	<key>uidata</key>
@@ -822,7 +822,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 				<string>Billing Contact</string>
 			</dict>
 			<key>description</key>
-			<string>Information to summarize in the Text View</string>
+			<string>Information to summarize in the Text View.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -841,7 +841,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 				<string>Hide Privacy Services</string>
 			</dict>
 			<key>description</key>
-			<string>Omit summarized contact data matching known WHOIS Privacy Services</string>
+			<string>Omit summarized contact data matching known WHOIS Privacy Services.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -879,7 +879,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 				<string>Instant Lookup</string>
 			</dict>
 			<key>description</key>
-			<string>Configure autocomplete behaviour of lookup history</string>
+			<string>Configure autocomplete behaviour of lookup history.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
