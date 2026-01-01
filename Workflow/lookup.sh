@@ -50,7 +50,7 @@ else
     readonly whois=$(whois "${domain}" | tr -d '\r')
     # Only write to cache if valid response
     mkdir -p "${alfred_workflow_cache}"
-    grep -q -E "^(\% This query returned 0 objects\.|\% Error: Invalid query|Domain not found|No match for domain)" <<< "${whois}" || echo "${whois}" > "${whois_file}"
+    grep -q -E "^(\% This query returned 0 objects\.|\% Error: Invalid query|Domain.*not found|Not found|No match for domain)" <<< "${whois}" || echo "${whois}" > "${whois_file}"
 fi
 
 # Skip formatting if viewing as text file
