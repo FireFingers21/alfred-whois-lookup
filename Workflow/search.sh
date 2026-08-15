@@ -7,6 +7,7 @@
 [[ ${enableIDNA} -eq 1 && "${1}" == *[^[:ascii:]]* ]] && domainEncoded=$(python3 -c 'import sys;print(sys.argv[1].encode("idna").decode())' "${1}")
 
 # Get Last Updated Time
+now="$(date +%s)"
 function getLastUpdated {
     if [[ ${1} -eq 0 || ${1} -gt 359 ]]; then
         lastUpdated="Just now"
@@ -21,7 +22,7 @@ function getLastUpdated {
     fi
 }
 whois_file="${alfred_workflow_cache}/${1//\//%2F}.txt"
-[[ -f "${whois_file}" ]] && getLastUpdated "$((($(date +%s)-$(date -r "${whois_file}" +%s))/60))" || lastUpdated="Just now"
+[[ -f "${whois_file}" ]] && getLastUpdated "$(((now-$(date -r "${whois_file}" +%s))/60))" || lastUpdated="Just now"
 
 # Autocomplete
 if [[ ${useAutocomplete} -eq 1 ]]; then
@@ -30,9 +31,8 @@ if [[ ${useAutocomplete} -eq 1 ]]; then
     topAutocomplete=$(basename -s ".txt" "${domainList%%$'\n'*}")
     # Generate results
     searchSuggestions="$(while IFS= read -r file; do
-        fileName=$(basename -s ".txt" "${file}")
-        fileName="${fileName//\%2F/\/}"
-        getLastUpdated "$((($(date +%s)-$(date -r "${file}" +%s))/60))"
+        fileName="${${file:t:r}//\%2F/\/}"
+        getLastUpdated "$(((now-$(date -r "${file}" +%s))/60))"
         # hex code: #4CA9F6
         cat << EOB
         {
