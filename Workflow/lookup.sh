@@ -31,7 +31,8 @@ blacklist=("Domains By Proxy, LLC" \
     "Privacy Protect, LLC (PrivacyProtect.org)" \
     "Privacy Hero Inc." \
     "Anonymize LLC" \
-    "Whois Privacy Protection Service, Inc.")
+    "Whois Privacy Protection Service, Inc." \
+    "Knock Knock WHOIS Not There, LLC")
 function contactSummary {
     # Check against privacy services blacklist
     if [[ "${hideBlacklist}" -eq 1 ]]; then
