@@ -14,6 +14,7 @@ readonly -a blacklist=(
     "Anonymize LLC"
     "Whois Privacy Protection Service, Inc."
     "Knock Knock WHOIS Not There, LLC"
+    "Contact Privacy Inc. Customer *"
 )
 
 # Domain Information
@@ -59,8 +60,8 @@ function contactSummary {
     if [[ "${hideBlacklist}" -eq 1 ]]; then
         # Check each field separately within array, return nothing if there's a match
         contactOrg=("${(f)$(awk -v pattern="${type} Organization" '$0 ~ pattern && !seen[$0]++ { $1=""; $2=""; print substr($0,3) }' <<< "${whois}")}")
-        for line in "${contactOrg[@]}"; do
-            (( ${blacklist[(Ie)${line}]} )) && return
+        for entry in "${blacklist[@]}"; do
+            (( ${contactOrg[(I)${entry}]} )) && return
         done
     fi
     # Fetch contact information, reject if redacted
