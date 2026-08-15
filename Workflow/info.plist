@@ -463,7 +463,7 @@
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>acceptstext</key>
-				<false/>
+				<true/>
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
@@ -485,7 +485,9 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string># Extract domain from query and TLDs from PSL
-domain="${${1#*://}%%/*}"
+query=$(grep -E -o '(https?:\/\/)*[^ ]+\.[^ ]+' &lt;&lt;&lt; "${1}" | head -n 1)
+trimmedQuery="${query//[[:space:]]/}"
+domain="${${${trimmedQuery#*://}%%/*}%%\?*}"
 tlds=($(grep -v -E "^(//|$)" "public_suffix_list.dat"))
 
 # Search for longest matching TLD
