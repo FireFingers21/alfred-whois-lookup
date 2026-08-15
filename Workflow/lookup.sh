@@ -23,7 +23,7 @@ function domainSummary {
 	    dateRegex = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
 		nsArr = 0; abuseArr = 0
 	}
-	/(^[[:blank:]]*[Dd]omain [Nn]ame|^[Dd]omain:)/ && !seen[$0]++ {
+	/(^[[:blank:]]*[Dd]omain [Nn]ame|^Domain:)/ && !seen[$0]++ {
 	    if ($0 ~ /\./) arr[0] = "* **Domain Name**: " tolower($NF)
 	}
 	/^[[:blank:]]*[Rr]egistrar:[^$]/ && !seen[$0]++ {
@@ -76,19 +76,31 @@ function contactSummary {
 
 # Fetch WHOIS data
 if [[ "${forceReload}" -ne 1 && -f "${whois_file}" ]] && [[ "$(date -r "${whois_file}" +%s)" -gt "$(date -v -"359"M +%s)" ]]; then
-    readonly whois=$(< "${whois_file}")
+    # Read from cache
+    whois=$(< "${whois_file}")
 else
-    readonly whois=$(whois "${domainEncoded}" | tr -d '\r')
     # Only write to cache if valid response
-    mkdir -p "${alfred_workflow_cache}"
-    grep -q -E "^(\% This query returned 0 objects\.|\% Error: Invalid query|Domain.*not found|Not found|No match for domain)" <<< "${whois}" || echo "${whois}" > "${whois_file}"
+    whoisData=$(whois "${domainEncoded}")
+    if [[ "${?}" -eq 0 ]]; then
+        whois="${whoisData//$'\r'/}"
+        mkdir -p "${alfred_workflow_cache}"
+        if ! grep -q -E "(^[[:blank:]]*[Dd]omain [Nn]ame|^Domain:)" <<< "${whois}" \
+        && grep -q -E "^(% This query returned 0 objects\.|% Error: Invalid query|Domain.*not found|Not found|%% NOT FOUND|No match for domain)" <<< "${whois}"
+        then
+            :
+        else
+            echo "${whois}" > "${whois_file}"
+        fi
+    else
+        printf "# WHOIS ${domain}\n\n---\n\n*Unable to connect to WHOIS server*" && exit
+    fi
 fi
 
 # Skip formatting if viewing as text file
 [[ "${fileView}" -eq 1 ]] && open "${whois_file}" && exit
 
 # Output formatted whois data to Text View
-echo -n "# WHOIS ${domain}"
+printf "# WHOIS ${domain}"
 [[ "${domainInfo}" -eq 1 ]] && domainSummary
 [[ "${registrantContact}" -eq 1 ]] && contactSummary "Registrant"
 [[ "${adminContact}" -eq 1 ]] && contactSummary "Admin"
