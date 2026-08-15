@@ -65,7 +65,11 @@ function contactSummary {
     fi
     # Fetch contact information, reject if redacted
     awk -v pattern="^${1}" '$0 ~ pattern && !seen[$0]++ {
-        if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /:[[:space:]]*$/ && $0 !~ /Email[^@]*$/ && NF > 2) print "*", $0
+        if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /:[[:space:]]*$/ && $0 !~ /Email[^@]*$/ && NF > 2) {
+            sub(/(Registrant|Admin|Tech|Billing).*:/, "**&**")
+            sub(/[[:space:]]*:\*\*/, "**:")
+            print "*", $0
+        }
     }' <<< "${whois}" | xargs -0 printf "\\n### ${1} Contact\\n%s"
 }
 
