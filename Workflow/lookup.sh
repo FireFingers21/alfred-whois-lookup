@@ -47,7 +47,7 @@ function contactSummary {
 if [[ "${forceReload}" -ne 1 && -f "${whois_file}" ]] && [[ "$(date -r "${whois_file}" +%s)" -gt "$(date -v -"359"M +%s)" ]]; then
     readonly whois=$(< "${whois_file}")
 else
-    readonly whois=$(whois "${domain}" | tr -d '\r')
+    readonly whois=$(whois "${domainEncoded}" | tr -d '\r')
     # Only write to cache if valid response
     mkdir -p "${alfred_workflow_cache}"
     grep -q -E "^(\% This query returned 0 objects\.|\% Error: Invalid query|Domain.*not found|Not found|No match for domain)" <<< "${whois}" || echo "${whois}" > "${whois_file}"
