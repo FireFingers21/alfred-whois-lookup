@@ -13,7 +13,7 @@ Perform a [WHOIS](https://en.wikipedia.org/wiki/WHOIS) lookup via the `whois` ke
 * <kbd>↩</kbd> View WHOIS data in Alfred's [Text View](https://www.alfredapp.com/help/workflows/user-interface/text/).
 * <kbd>⌘</kbd><kbd>↩</kbd> View raw WHOIS data in a text file.
 
-Autocomplete previous lookups by pressing tab or selecting from the search suggestions. By default, the first suggestion will be tab-completed.
+Autocomplete previous lookups by pressing tab or selecting from the search suggestions. By default, the first suggestion can be tab-completed.
 
 ![Using autocomplete](Workflow/images/about/autocomplete.png)
 
@@ -21,8 +21,8 @@ When viewing a WHOIS response, the [Text View](https://www.alfredapp.com/help/wo
 
 ![Viewing WHOIS data for alfredapp.com](Workflow/images/about/textView.png)
 
-* <kbd>⌥</kbd><kbd>↩</kbd> Refresh WHOIS data (Lookups are cached for 6 hours).
 * <kbd>⌘</kbd><kbd>↩</kbd> Open raw WHOIS data in a text file.
+* <kbd>⌥</kbd><kbd>↩</kbd> Refresh WHOIS data (Lookups are cached for 24 hours).
 
 Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to perform a WHOIS lookup. Use the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/) to query URLs from Alfred’s [Clipboard History](https://www.alfredapp.com/help/features/clipboard/) or selected text.
 
