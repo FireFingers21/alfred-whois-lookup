@@ -9,7 +9,7 @@
 # Get Last Updated Time
 now="$(date +%s)"
 function getLastUpdated {
-    if [[ ${1} -eq 0 || ${1} -gt 359 ]]; then
+    if [[ ${1} -eq 0 || ${1} -ge 1440 ]]; then
         lastUpdated="Just now"
     elif [[ ${1} -eq 1 ]]; then
         lastUpdated="${1} minute ago"
