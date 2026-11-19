@@ -28,35 +28,47 @@ readonly -a blacklist=(
 function domainSummary {
 	awk 'BEGIN {
 	    dateRegex = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
-		nsArr = 0; abuseArr = 0
+		statusArr = 0; nsArr = 0; abuseArr = 0
 	}
-	/(^[[:blank:]]*[Dd]omain [Nn]ame|^Domain:)/ && !seen[$0]++ {
-	    if ($0 ~ /\./) arr[0] = "* **Domain Name**: " tolower($NF)
+	!recordStart { if (/^# whois\./) recordStart = 1; next }
+	/(^[[:blank:]]*[Dd]omain [Nn]ame|^[Dd]omain:)/ && !seen[$0]++ {
+	    if ($0 ~ /\./) arr[0] = "| **Domain Name**:|" tolower($NF) "|"
 	}
 	/^[[:blank:]]*[Rr]egistrar:[^$]/ && !seen[$0]++ {
-	    $1=""; arr[1] = "* **Registrar**:" $0
+	    $1=""; arr[1] = "| **Registrar**:|" $0 "|"
 	}
-	/^[[:blank:]]*Creation Date|Created/ && !seen[$0]++ {
+	/^[[:blank:]]*Creation Date|[Cc]reated/ && !seen[$0]++ {
 	    start = match($0,dateRegex)
-		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[2] = "* **Creation Date**: " substr($0,start,10)
+		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[2] = "| **Creation Date**:|" substr($0,start,10) "|"
 	}
 	/Expir.*Date:/ && !seen[$0]++ {
 	    start = match($0,dateRegex)
-		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[3] = "* **Expiry Date**: " substr($0,start,10)
+		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[3] = "| **Expiry Date**:|" substr($0,start,10) "|"
 	}
-	/(^[[:blank:]]*Updated Date|^[Ll]ast.?([Uu]pdate|Modified))/ && !seen[$0]++ {
+	/(^[[:blank:]]*Updated Date|^[Ll]ast.?([Uu]pdate|Modified)|^Changed)/ && !seen[$0]++ {
 	    start = match($0,dateRegex)
-		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[4] = "* **Renewed Date**: " substr($0,start,10)
+		if ($0 ~ /[0-9]{4}-[0-9]{2}-[0-9]{2}/) arr[4] = "| **Renewed Date**:|" substr($0,start,10) "|"
 	}
-	/^[[:blank:]]*Name Server|Nserver/ && $0 !~ /:[[:space:]]*$/ && !seen[tolower($NF)]++ {
-	    ns[nsArr++] = "* **Name Server**: " tolower($NF)
+	/^source:/ { domainSectionDone = 1 }
+	!domainSectionDone && /^[[:blank:]]*(Domain Status|Status|eppstatus):[^$]/ && !seen[tolower($NF)]++ {
+	    if (NF <= 2) status[statusArr++] = $NF; else if ($NF ~ /http/) status[statusArr++] = $(NF-1)
+	}
+	/^[[:blank:]]*Name Server|[Nn]server/ && $0 !~ /:[[:space:]]*$/ && !seen[tolower($NF)]++ {
+	    ns[nsArr++] = tolower($NF)
 	}
 	/^[[:blank:]]*Registrar Abuse Contact Email/ && $0 !~ /:[[:space:]]*$/ && !seen[$5]++ {
-	    abuse[abuseArr++] = "* **Registrar Abuse Contact Email**: " tolower($5)
+	    abuse[abuseArr++] = "| **Abuse Contact**:|" tolower($5) "|"
 	}
 	END {
 		for (i = 0; i <= 4; i++) print arr[i]
-		for (i = 0; i < nsArr; i++) print ns[i]
+		for (i = 0; i < statusArr; i++) {
+		    if (i == 0) printf "| **Status**: | "
+		    printf "%s%s%s", status[i], ((i+1 < statusArr) ? ", " : ""), ((i+1 == statusArr) ? " |\n" : "")
+		}
+		for (i = 0; i < nsArr; i++) {
+		    if (i == 0) printf "| **Name Servers**: | "
+		    printf "%s%s%s", ns[i], ((i+1 < nsArr) ? "<br>" : ""), ((i+1 == nsArr) ? " |\n" : "")
+		}
 		for (i = 0; i < abuseArr; i++) print abuse[i]
 	}' <<< "${whois}" | grep -vx '' | xargs -0 printf "\\n\\n### Domain Information\\n%s"
 }
@@ -71,14 +83,16 @@ function contactSummary {
             (( ${contactOrg[(I)${entry}]} )) && return
         done
     fi
-    # Fetch contact information, reject if redacted
+    # Fetch & format Contact Details, reject if redacted
     awk -v pattern="^${1}" '$0 ~ pattern && !seen[$0]++ {
         if (toupper($0) !~ /(REDACTED|GDPR.MASK)/ && $0 !~ /:[[:space:]]*$/ && $0 !~ /Email[^@]*$/ && NF > 2) {
-            sub(/(Registrant|Admin|Tech|Billing).*:/, "**&**")
+            sub(/(Registrant|Admin|Tech|Billing).*:/, "| **&** |")
+            if ($0 !~ /(Registrant|Admin|Tech|Billing)[[:blank:]]*:/)
+                sub(/(Registrant|Admin|Tech|Billing) /, "")
             sub(/[[:space:]]*:\*\*/, "**:")
-            print "*", $0
+            print $0, "|"
         }
-    }' <<< "${whois}" | xargs -0 printf "\\n### ${1} Contact\\n%s"
+    }' <<< "${whois}" | xargs -0 printf "\\n### ${1} Contact\\n| Field | ${1} Contact Details |\\n|-|-|\\n%s"
 }
 
 # Fetch WHOIS data
@@ -88,11 +102,11 @@ if [[ "${forceReload}" -ne 1 && -f "${whois_file}" ]] && [[ "$(date -r "${whois_
 else
     # Only write to cache if valid response
     whoisData=$(whois "${domainEncoded}")
-    if [[ "${?}" -eq 0 ]]; then
+    if [[ "${?}" -eq 0 || "${?}" -eq 71 ]]; then
         whois="${whoisData//$'\r'/}"
         mkdir -p "${alfred_workflow_cache}"
         if ! grep -q -E "(^[[:blank:]]*[Dd]omain [Nn]ame|^Domain:)" <<< "${whois}" \
-        && grep -q -E "^(% This query returned 0 objects\.|% Error: Invalid query|Domain.*not found|Not found|%% NOT FOUND|No match for domain)" <<< "${whois}"
+        && grep -q -E "^(% This query returned 0 objects\.|% Error: Invalid query|Domain.*not found|Not found|%% NOT FOUND|No match for domain|The queried object does not exist)" <<< "${whois}"
         then
             :
         else
